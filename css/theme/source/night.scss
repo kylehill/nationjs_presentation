@@ -12,22 +12,24 @@
 
 
 // Include theme-specific fonts
-@import url(https://fonts.googleapis.com/css?family=Montserrat:700);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,700italic);
 
 
 // Override theme settings (see ../template/settings.scss)
 $backgroundColor: #111;
 
-$mainFont: 'Open Sans', sans-serif;
-$linkColor: #e7ad52;
+$mainFont: 'Montserrat', sans-serif;
+$linkColor: lighten( teal, 20% );
 $linkColorHover: lighten( $linkColor, 20% );
-$headingFont: 'Montserrat', Impact, sans-serif;
+$headingFont: 'Montserrat', sans-serif;
 $headingTextShadow: none;
 $headingLetterSpacing: -0.03em;
 $headingTextTransform: none;
+$headingLineHeight: 1.05em;
 $selectionBackgroundColor: #e7ad52;
 $mainFontSize: 30px;
+$spanColor: lighten( #8cc84b, 20% );
 
 
 // Theme template ------------------------------
