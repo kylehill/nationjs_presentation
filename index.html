@@ -43,7 +43,7 @@
 				    Kyle Hill<br/>
 				    <a>@kylehill</a></br>
 				    kyle@jibe.com<br/>
-				    October 5, 2013
+				    NationJS 2013
 				  </p>
 				</section>
 
@@ -52,7 +52,23 @@
         </section>
 				
 				<section>
+          <h2>Programming should be <a>fun</a></h2>
+        </section>
+        
+				<section>
           <h2>Fun = <a>creativity</a></h2>
+        </section>
+        
+        <section>
+          <img src="lib/img/Mona_Lisa.jpg">
+        </section>
+        
+        <section>
+          <img src="lib/img/beatles-abbey-road.jpg">
+        </section>
+
+        <section>
+          <img src="lib/img/fallingwater.jpg">
         </section>
 
 				<section>
@@ -64,6 +80,14 @@
 				</section>
 				
 				<section>
+				  <img src="lib/img/Michelangelos_David.jpg">
+				</section>
+        
+				<section>
+				  <img src="lib/img/queen_victoria.jpg">
+				</section>
+        
+        <section>
 				  <h2>An inflexible "<a>masterpiece</a>" = </h2>
 				  <h2>drilling holes for fig leaf hooks</h2>
 				</section>
@@ -74,7 +98,8 @@
 				</section>
 				
 				<section>
-				  <h2>Defer decision-making until the last <a>responsible</a> moment</h2>
+				  <h3>"Defer decision-making until the last <a>responsible</a> moment."</h3>
+				  <p class="attribute">-- Yehuda Katz</p>
 				</section>
 								
 				<section>
@@ -82,11 +107,19 @@
 				</section>
 				
 				<section>
-				  <h2>Rails creates interfaces for eventual decisions</h2>
+				  <h2>Test-driven Development<h2>
 				</section>
 				
 				<section>
-				  <h2>Convention over Configuration</h2>
+				  <h2>Don't Repeat Yourself<h2>
+				</section>
+				
+				<section>
+				  <h2><a>Convention over Configuration</a><h2>
+				</section>
+				
+				<section>
+				  <h2>Rails <a>dictates</a> patterns for eventual decisions</h2>
 				</section>
 				
 				<section>
@@ -97,14 +130,14 @@
 				  <h2>Programming should be <a>fun</a></h2>
 				</section>
 
+				<section>
+				  <h2>Rails is a <a>framework</a> which is built for Agile</h2>
+				</section>
+
         <section>
           <h2>Frameworks aren't <a>creative</a></h2>
           <h2>Frameworks are plumbing</h2>
         </section>
-
-				<section>
-				  <h2>Rails is a <a>framework</a> which is built for Agile</h2>
-				</section>
 
         <section>
 				  <h2>Rails is an <a>opinionated, frameworky framework</a> which is built for Agile</h2>
@@ -120,11 +153,16 @@
 				</section>
 				
 				<section>
-				  <h2>Rails has <a>quality</a></h2>
+				  <h2>Rails has <a>quality</a>, but.</h2>
 				</section>
 				
 				<section>
 				  <h2><span>node</span></h2>
+				</section>
+				
+				<section>
+			    <h3>"I started playing with node and was just setting up sockets and listeners and content types, and I was like, 'whoa.'<br/><br/><span>It was awesome.</span>"</h3>
+          <p class="attribute">-- the masochistic Rails dev I work with</p>
 				</section>
 				
 				<section>
@@ -161,6 +199,65 @@
 				</section>
 				
 				<section>
+				  <h3><span>app.js</span> // everyone's first node app</h3>
+<pre><code class="javascript embiggen">var express = require('express')
+  , http = require('http')
+  , path = require('path');
+
+var app = express();
+
+var routes = {
+  index: function(req, res){
+    res.render('index', { title: 'Express' });
+  },
+  
+  route: function(req, res){
+    res.json("route")
+  },
+  
+  stop: function(req, res){
+    var id = req.params["stop"];
+    models.Stop.findOne({id: id}, function(err, item){
+      models.Trip.findOne({}, function(err, trip){
+        console.log(trip);
+        res.json(err);
+      })
+    });
+  }
+}
+
+app.configure(function(){
+  app.set('port', process.env.PORT || 3000);
+  app.set('views', __dirname + '/views');
+  app.set('view engine', 'hbs');
+  app.use(express.favicon());
+  app.use(express.logger('dev'));
+  app.use(express.bodyParser());
+  app.use(express.methodOverride());
+  app.use(app.router);
+  app.use(require('less-middleware')({ src: __dirname + '/public' }));
+  app.use(express.static(path.join(__dirname, 'public')));
+});
+
+app.configure('development', function(){
+  app.use(express.errorHandler());
+});
+
+app.get('/', routes.index);
+app.get('/v1/n', routes.nearby);
+app.get('/v1/r/:route', routes.route);
+app.get('/v1/s/:stop', routes.stop);
+app.get('/v1/m', routes.map);
+app.get('/v1/b', routes.bikeshare);
+
+http.createServer(app).listen(app.get('port'), function(){
+  console.log("Express server listening on port " + app.get('port'));
+});
+
+</code></pre>
+				</section>
+				
+				<section>
 				  <h2>Quality requires structure</h2>
 				</section>
 				
@@ -173,13 +270,16 @@
 				</section>
 				
 				<section>
-				  <h3><span>app.js</span></h3>
-<pre><code class="javascript embiggen">var express = require('express')
-var http = require('http')
+				  <h3>require(<span>"thing"</span>)<br/>&rarr; /node_modules/thing/index.js</h3>
+				  <h3>&nbsp;</h3>
+				  <h3>require(<span>"./thing"</span>)<br/>&rarr; /thing.js || /thing/index.js</h3>
+				</section>
+        
+        <section>
+				  <h3><span>app.js</span>  // npm start</h3>
+<pre><code class="javascript embiggen">app = (require("./config"))()
 
-(require("./config"))(app)
-
-var server = http.createServer(app)
+var server = require('http').createServer(app)
 server.listen(app.get('port'), function(){
   console.log("Express running on " + app.get("port"))
 })
@@ -187,16 +287,26 @@ server.listen(app.get('port'), function(){
 				</section>
 				
 				<section>
-				  <h3>Instantiate the app</h3>
-				  <h3>Populate the app</h3>
-				  <h3>Instantiate the web server</h3>
+				  <h3>Routes establish endpoints</h3>
+				  <h3>Controllers are the switchboard</h3>
+				  <h3>Views act as rendering pathways</h3>
+				  <h3>Models contain data and business logic</h3>
+				  <h3>Library functions are tribal knowledge</h3>
 				</section>
 				
 				<section>
+				  <h3>Routes require controllers...</h3>
+				  <h3>Controllers require views...</h3>
+				  <h3>Views require models...</h3>
+				  <h3>Models require library functions...</h3>
+				  <h3>Library functions can exist alone<h3>
+				</section>
+        
+        <section>
 				  <h3><span>config/index.js</span></h3>
-<pre><code class="javascript embiggen">exports = module.exports = function(app) {
+<pre><code class="javascript embiggen">exports = module.exports = function() {
 
-  app = (require("../bootstrap"))(app)
+  app = (require("../bootstrap"))()
 
   app = (require("../lib"))(app)
   app = (require("../models"))(app)
@@ -210,79 +320,220 @@ server.listen(app.get('port'), function(){
 				</section>
 				
 				<section>
-				  <h3>Routes require controllers...</h3>
-				  <h3>Controllers require views...</h3>
-				  <h3>Views require models...</h3>
-				  <h3>Models require library functions...</h3>
-				  <h3>Library functions require a working app<h3>
-				</section>
-				
-				<section>
 				  <h2>Hierarchical dependencies</h2>
 				  <h2>Easy to maintain <span>testability</span></h2>
 				</section>
 				
+        <section>
+          <h2>Route through <span>multiple</span> controllers</h2>
+        </section>
+
 				<section>
-				  <h3><span>bootstrap.js</span></h3>
+				  <h3><span>routes/index.js</span></h3>
 <pre><code class="javascript embiggen">exports = module.exports = function(app) {
-  app.configure(function(){
-    app.set('port', process.env.PORT || 3000)
-    app.set('views', __dirname + '/templates')
-    app.set('view engine', require('hbs'))
-    app.use(express.bodyParser())
-    app.use(express.cookieParser("secret_code_goes_here"))
-    app.use(express.session())
-    app.use(express.methodOverride())
-    app.use(app.router)
-    app.use(require('less-middleware')({ src: __dirname + '/public' }))
-    app.use(express.static((require('path')).join(__dirname, 'public')))
-  })
+  app.all("/", app.controllers.landing)
+  app.get("/client/:client", app.controllers.landing)
+
+  app.post("/login", 
+          app.controllers.authenticate
+          app.controllers.display)
+
+  app.get("/dashboard", 
+          app.controllers.auth, 
+          app.controllers.display)
+
+  app.all("*", app.controllers.404)
+}
+</code></pre>				  
+				</section>
+
+        <section>
+          <h2>Controllers grok queries, redirect to views (or defer)</h2>
+        </section>
+        
+        <section>
+  				  <h3><span>controllers/index.js</span></h3>
+<pre><code class="javascript embiggen">exports = module.exports = function(app) {
+  app = app || {}
+
+  app.controllers = {
+    landing: require("./landing"),
+    display: require("./display"),
+    auth: require("./auth"),
+    authenticate: require("./authenticate")
+  }
+}
 </code></pre>
+        
+        </section>
+
+        <section>
+				  <h3><span>controllers/landing.js</span></h3>
+<pre><code class="javascript embiggen">exports = module.exports = function(req, res, defer, app) {
+  // Hey, look, it's the application context!
+  app = req.app || app
+
+  if (req.param("client")) { 
+    return app.views.client_specific_landing(req, res, app)  
+  }
+
+  app.views.landing(req, res, app)
+
+}
+</code></pre>				  
+				</section>
+
+				<section>
+				  <h3><span>controllers/auth.js</span></h3>
+<pre><code class="javascript embiggen">exports = module.exports = function(req, res, defer, app) {
+  app = req.app || app
+
+  if (req.session.username) { 
+    return defer() 
+  }
+
+  app.views.logout(req, res, app)
+
+}
+</code></pre>				  
+				</section>
+
+        <section>
+          <h2>Views handle rendering, terminate routes/controllers</h2>
+        </section>
+
+        <section>
+				  <h3><span>views/landing.js</span></h3>
+<pre><code class="javascript embiggen">exports = module.exports = function(req, res, app) {
+  app = app || {}
+
+  app.models.user.findOne({ username: req.param("username") })
+   .exec(function(err, user){
+     if (err) { res.render("error_template") } 
+
+     if (!user) { res.render("user_not_found") }
+
+     res.render("dashboard", { 
+       username: user.username 
+      })
+   })
+}
+</code></pre>				  
 				</section>
 				
 				<section>
-				  <h3><span>bootstrap.js</span></h3>
-<pre><code class="javascript embiggen">  // Globally namespaced on purpose
-  ld = require("lodash")
-  async = require("async")
-  moment = require("moment")
-  mongoose = require("mongoose")
+				  <h2>Make code testable <span>without</span> an application context</h2>
+				</section>
+
+				<section>
+				  <h3><span>models/index.js</span></h3>
+<pre><code class="javascript embiggen">exports = module.exports = function(app){
+  // Can't set property of undefined, so
+  app = app || {}
+
+  app.models = {
+    user: require("./user"),
+    client: require("./client")
+  }
+
+  return app
+}
+</code></pre>
+				</section>
+
+				<section>
+				  <h3><span>test/models/index.js</span></h3>
+<pre><code class="javascript embiggen">var code = require("../../models").models
+
+it("should have all the models we want", function(){
+  assert.hasProperty( code.user )
+  assert.hasProperty( code.client )
+})
+</code></pre>
+				</section>
+
+        <section>
+				  <h2>Grow the application context</h2>
+				</section>
+
+				<section>
+				  <h3><span>lib/index.js</span></h3>
+<pre><code class="javascript embiggen">var ld = require("lodash")
+exports = module.exports = function(app){
+  app = app || {}
+
+  app.lib = ld.extend({},
+                      require("./fibonacci"),
+                      require("./functionCompose"),
+                      require("./beeramid")
+                     )
+  return app
+}
+</code></pre>
+				</section>			
+
+				<section>
+				  <h2>Break things into component parts for testability</h2>
+				</section>
+
+				<section>
+				  <h3><span>lib/beeramid.js</span></h3>
+<pre><code class="javascript embiggen">var beeramid = function() { ... }
+var levelCounter = function() { ... }
+var canAmountDeterminizer = function() { ... }
+
+// Anything not exported is private, untestable
+exports = module.exports = {
+  beeramid: beeramid,
+  levelCounter: levelCounter,
+  canAmountDeterminizer: canAmountDeterminizer
+}
+</code></pre>				  
+				</section>
+
+				<section>
+				  <h2>Test-Driven Development</h2>
+				</section>
+				
+				<section>
+				  <h3><span>test/lib/beeramid.js</span></h3>
+<pre><code class="javascript embiggen">var code = require("../../lib/beeramid")
   
+it("should calculate beeramid correctly", function(){
+  assert.equal( code.beeramid(2, 30), 3 )
+  assert.equal( code.beeramid(2, 26), 2 )
+})
+
+it("should calculate level size correctly", function(){
+  assert.equal( code.levelCounter(2, 2), 8 )
+})
+</code></pre>				  
+				</section>		
+				
+        <section>
+				  <h3><span>bootstrap.js</span></h3>
+<pre><code class="javascript embiggen">exports = module.exports = function(app) {
+  var express = require("express")
+  var app = express()
+  app.configure(function(){ /* app.set and app.use stuff */ })
+
+  // initialize connections here too
   return app
 })
 </code></pre>
 				</section>
-				
+
 				<section>
-				  <h2>Let globally-used <span>libraries</span> leak</h2>
+				  <h2>Testable, logical code = <span>quality</span></h2>
 				</section>
 				
 				<section>
-				  <h3><span>lib/index.js</span></h3>
-<pre><code class="javascript embiggen">exports = module.exports = function(app){
-
-  app.lib = {
-    findFromDb: require("./findFromDb"),
-
-    findFromNpm: require("./findFromNpm"),
-    
-    findFromBower: require("./findFromBower"),
-    
-    getSiteUrl: require("./getSiteUrl")
-  }
-  
-  return app
-  
-}
-</code></pre>
-				</section>				
-				
-				<section>
-				  <h2>Append and return the application context</h2>
-				  <h2>Break into component parts for testability</h2>
+				  <h2>Quality + creativity = <a>Fun!</a></h2>
 				</section>
 				
 				<section>
+				  PS we're hiring
+				  <br/><br/><br/><br/>
 				  <p class="attribute">
 				    Kyle Hill<br/>
 				    <a>@kylehill</a></br>
